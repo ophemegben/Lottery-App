@@ -10,6 +10,7 @@ function App() {
   const [totalCash, setTotalCash] = useState(0); // State for total money
   const [confirmedNumbers, setConfirmedNumbers] = useState([]);
   const [canSelectCash, setCanSelectCash] = useState(false);
+  const [isRandomSelection, setIsRandomSelection] = useState(false);
 
 
   const handleAddCash = (amount) => {
@@ -32,6 +33,7 @@ function App() {
     setConfirmedNumbers([]);
     setTotalCash(0);
     setCanSelectCash(false);
+    setIsRandomSelection(true);
   };
 
 
@@ -64,7 +66,7 @@ function App() {
             }}
             onRandom={handleRandomInput}
             onCashClick={handleCashClick}
-            
+            isRandomSelection={isRandomSelection}
             />
 
           {/* Passing props to CashInput */}

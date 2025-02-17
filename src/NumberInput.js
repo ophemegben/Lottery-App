@@ -1,8 +1,13 @@
 import React from 'react';
 
-const NumberInput = ({ selectedNumbers, onSelect, onClear, onCashClick, onRandom }) => {
+const NumberInput = ({ selectedNumbers, onSelect, onClear, onCashClick, onRandom, isRandomSelection}) => {
 
     const handleClick = (num) => {
+
+        if (isRandomSelection) {
+            return; //this prevents the cashier from deselecting the random selection
+        }
+
         if (selectedNumbers.includes(num)) {
           onSelect(selectedNumbers.filter((n) => n !== num)); // Remove number
         } else if (selectedNumbers.length < 5) {
