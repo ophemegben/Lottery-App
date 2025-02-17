@@ -15,7 +15,7 @@ function App() {
 
   const handleCashAdd = (amount) => {
     if (selectedNumbers.length < 5) { 
-      alert("Please select 5 numbers first")
+      alert("Please select 5 numbers before proceeding to cash") 
     }
     else if (!canSelectCash) {
       alert("Click the Cash button first before selecting money");
@@ -47,7 +47,7 @@ function App() {
   //Function to confirm number selection 
   const handleCashClick = () => {
     if (selectedNumbers.length < 5) { //Checks if the selectedNumbers state contains 5 numbers in the array
-      alert("Please select 5 numbers before proceeding to cash.");
+      alert("Please select 5 numbers before proceeding to cash");
     } else {
       setConfirmedNumbers(selectedNumbers); // Updates the confirmedNumbers state with the 5 selected numbers. This Update ViewPane
       setCanSelectCash(true); //canSelectCash is then set to true to allow the cashier input the money value
