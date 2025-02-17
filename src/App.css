@@ -3,6 +3,7 @@ body {
     background-color: #f4f4f4;
     text-align: center;
     color: #000;
+    padding-top: 100px;
   }
   
   .container {
@@ -47,7 +48,7 @@ body {
   .viewcontainer{
     width: 35%;
     height: 340px;
-    background: #ffd11d;
+    background: linear-gradient(to right, #ffd11d, #f8c531);
     padding: 15px;    
     border-bottom-right-radius: 10px;
     border-left: 1px solid #ddd;
@@ -93,6 +94,7 @@ body {
     background: linear-gradient(to right, #295abb, #6892e2);
     border-radius: 50px;
     width: 40px;    
+    font-weight: bold;
     box-shadow: 0px 0px 5px #999;
   }
 

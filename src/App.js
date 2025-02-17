@@ -8,19 +8,26 @@ function App() {
 
   const [selectedNumbers, setSelectedNumbers] = useState([]); // State for selected numbers
   const [totalCash, setTotalCash] = useState(0); // State for total money
-  const [confirmedNumbers, setConfirmedNumbers] = useState([]);
-  const [canSelectCash, setCanSelectCash] = useState(false);
-  const [isRandomSelection, setIsRandomSelection] = useState(false);
+  const [confirmedNumbers, setConfirmedNumbers] = useState([]); //State that converts selected numbers to confirmed numbers after cash is clicked
+  const [canSelectCash, setCanSelectCash] = useState(false); //State for cash button clicking
+  const [isRandomSelection, setIsRandomSelection] = useState(false); //State for random selection
 
 
-  const handleAddCash = (amount) => {
-    if (totalCash + amount > 100) {
+  const handleCashAdd = (amount) => {
+    if (selectedNumbers.length < 5) { 
+      alert("Please select 5 numbers first")
+    }
+    else if (!canSelectCash) {
+      alert("Click the Cash button first before selecting money");
+    }
+    else if (totalCash + amount > 100) {
       alert("Cannot select more than $100");
     } else {
       setTotalCash(totalCash + amount);
     }
   };
 
+  //Function to handle random input when the cashier does not pick the number values 
   const handleRandomInput = () => {
     let randomNumbers = [];
     while (randomNumbers.length < 5) {
@@ -29,20 +36,21 @@ function App() {
         randomNumbers.push(num);
       }
     }
-    setSelectedNumbers(randomNumbers);
-    setConfirmedNumbers([]);
-    setTotalCash(0);
-    setCanSelectCash(false);
-    setIsRandomSelection(true);
+    setSelectedNumbers(randomNumbers); //Updates the selectedNumbers state with the random numbers generated 
+    setConfirmedNumbers([]); //ConfirmedNumbers state is updated to an empty array in the case where it contained some values
+    setTotalCash(0); //TotalCash state is set to 0 as the cashier will need to click on cash before the money amounts are picked
+    setCanSelectCash(false); //CanSelectCash is reset to false 
+    setIsRandomSelection(true); //IsRandomSelection is set to true
   };
 
 
+  //Function to confirm number selection 
   const handleCashClick = () => {
-    if (selectedNumbers.length < 5) {
+    if (selectedNumbers.length < 5) { //Checks if the selectedNumbers state contains 5 numbers in the array
       alert("Please select 5 numbers before proceeding to cash.");
     } else {
-      setConfirmedNumbers(selectedNumbers); // Update ViewPane with selected numbers
-      setCanSelectCash(true);
+      setConfirmedNumbers(selectedNumbers); // Updates the confirmedNumbers state with the 5 selected numbers. This Update ViewPane
+      setCanSelectCash(true); //canSelectCash is then set to true to allow the cashier input the money value
     }
   };
 
@@ -57,25 +65,26 @@ function App() {
           {/* Passing props to NumberInput */}
           <NumberInput 
             selectedNumbers={selectedNumbers} 
-            onSelect={setSelectedNumbers}
-            onClear={() => {
-              setSelectedNumbers([]); // Reset numbers
-              setTotalCash(0); // Reset cash
-              setConfirmedNumbers([]);
+            setSelectedNumbers={setSelectedNumbers}
+            ClearClick={() => {
+              setSelectedNumbers([]); // Resets the selected numbers
+              setTotalCash(0); // Reset the total cash amount
+              setConfirmedNumbers([]); //Resets confirmed numbers
               setCanSelectCash(false);
             }}
-            onRandom={handleRandomInput}
-            onCashClick={handleCashClick}
+            RandomClick={handleRandomInput}
+            CashClick={handleCashClick}
             isRandomSelection={isRandomSelection}
             />
 
           {/* Passing props to CashInput */}
           <CashInput 
             totalCash={totalCash} 
-            onAddCash={handleAddCash} 
+            handleCashAdd={handleCashAdd} 
             canSelectCash={canSelectCash}
             selectedNumbersCount={selectedNumbers.length}
           />
+
         </div>
         {/* Passing props to ViewPane */}
         <ViewPane 

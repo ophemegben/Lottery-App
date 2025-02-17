@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NumberInput = ({ selectedNumbers, onSelect, onClear, onCashClick, onRandom, isRandomSelection}) => {
+const NumberInput = ({ selectedNumbers, setSelectedNumbers, ClearClick, CashClick, RandomClick, isRandomSelection}) => {
 
     const handleClick = (num) => {
 
@@ -9,9 +9,9 @@ const NumberInput = ({ selectedNumbers, onSelect, onClear, onCashClick, onRandom
         }
 
         if (selectedNumbers.includes(num)) {
-          onSelect(selectedNumbers.filter((n) => n !== num)); // Remove number
+          setSelectedNumbers(selectedNumbers.filter((n) => n !== num)); // Remove number
         } else if (selectedNumbers.length < 5) {
-          onSelect([...selectedNumbers, num]); // Add number
+          setSelectedNumbers([...selectedNumbers, num]); // Add number
         } else {
           alert("Only 5 numbers can be selected.");
         }
@@ -28,10 +28,10 @@ const NumberInput = ({ selectedNumbers, onSelect, onClear, onCashClick, onRandom
                 {i + 1}
             </button>
             ))}
-            <div className="action-buttons">
-                <button className="action-button" onClick={onClear}>Clear</button>
-                <button className="action-button" onClick={onCashClick}>Cash</button>
-                <button className="action-button" onClick={onRandom}>Random</button>
+            <div>
+                <button className="action-button" onClick={ClearClick}>Clear</button>
+                <button className="action-button" onClick={CashClick}>Cash</button>
+                <button className="action-button" onClick={RandomClick}>Random</button>
             </div>
     </div>
     )
