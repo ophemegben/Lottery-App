@@ -79,10 +79,7 @@ function App() {
 
           {/* Passing props to CashInput */}
           <CashInput 
-            totalCash={totalCash} 
             handleCashAdd={handleCashAdd} 
-            canSelectCash={canSelectCash}
-            selectedNumbersCount={selectedNumbers.length}
           />
 
         </div>
